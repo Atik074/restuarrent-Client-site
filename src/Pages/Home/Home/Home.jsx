@@ -5,6 +5,7 @@ import Service from '../Service/Service';
 import PopularMenu from '../PopularMenu/PopularMenu';
 import Features from '../Featured/Features';
 import Testimonial from '../Testimonial/Testimonial';
+import { Helmet } from 'react-helmet-async';
 
 
 
@@ -12,6 +13,9 @@ import Testimonial from '../Testimonial/Testimonial';
 const Home = () => {
     return (
         <div>
+        <Helmet>
+              <title>Bisto Boss | Home</title>
+         </Helmet>
            <Banner/>
            <Category/>
            <Service/>

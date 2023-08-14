@@ -6,16 +6,9 @@ const NavBar = () => {
     const navOptions = <> 
         
           <li className='text-white font-medium'><Link to='/'>HOME</Link></li>
-        <li tabIndex={0}>
-        <details>
-          <summary  className='text-white font-medium'><Link to='menu'>OUR MENU</Link></summary>
-          <ul className="p-2">
-            <li><a>Submenu 1</a></li>
-            <li><a>Submenu 2</a></li>
-          </ul>
-        </details>
-      </li>
+       
        <li className='text-white font-medium'><Link to='/dashboard'>DASHBOARD</Link></li>
+       <li className='text-white font-medium'><Link to='/menu'>OUR MENU</Link></li>
        <li className='text-white font-medium'><Link to='/contact'>CONTACT US</Link></li>
        <li className='text-white font-medium'><Link to='/ourshop'>OUR SHOP</Link></li> 
 
