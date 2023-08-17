@@ -4,6 +4,8 @@ import 'react-tabs/style/react-tabs.css';
 import orderImg from '../../assets/shop/banner2.jpg';
 import Cover from '../Home/Shared/Cover/Cover';
 import useMenu from '../../Hooks/UseMenu';
+import FoodCard from '../../Components/FoodCard/FoodCard';
+import OrderTab from './OrderTab/OrderTab';
 
  
 
@@ -11,7 +13,7 @@ const Order = () => {
     const [menu] = useMenu()
     const [tabIndex, setTabIndex] = useState(0);
 
-    const offered = menu.filter(item =>item.category == 'offered')
+    const drinks = menu.filter(item =>item.category == 'drinks')
     const desserts = menu.filter(item =>item.category == 'dessert')
     const pizza = menu.filter(item =>item.category == 'pizza')
     const salads = menu.filter(item =>item.category == 'salad')
@@ -24,7 +26,7 @@ const Order = () => {
         ></Cover>
 
 <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
-      <TabList>
+      <TabList  className='mt-24 text-center text-[20px]'>
         <Tab>Salads</Tab>
         <Tab>Pizza</Tab>
         <Tab>Soups</Tab>
@@ -32,8 +34,26 @@ const Order = () => {
         <Tab>Drinks</Tab>
     
       </TabList>
-      <TabPanel></TabPanel>
-      <TabPanel></TabPanel>
+      <TabPanel>
+        <OrderTab items={salads}></OrderTab>
+      </TabPanel>
+
+      <TabPanel>
+      <OrderTab items={pizza}></OrderTab>
+      </TabPanel>
+
+      <TabPanel>
+      <OrderTab items={soups}></OrderTab>
+      </TabPanel>
+
+      <TabPanel>
+      <OrderTab items={desserts}></OrderTab>
+      </TabPanel>
+      <TabPanel>
+      <OrderTab items={drinks}></OrderTab>
+      </TabPanel>
+          
+    
     </Tabs>
           
         </div>
