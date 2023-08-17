@@ -7,10 +7,10 @@ const NavBar = () => {
         
           <li className='text-white font-medium'><Link to='/'>HOME</Link></li>
        
-       <li className='text-white font-medium'><Link to='/dashboard'>DASHBOARD</Link></li>
+       <li className='text-white font-medium '><Link to='/dashboard'>DASHBOARD</Link></li>
        <li className='text-white font-medium'><Link to='/menu'>OUR MENU</Link></li>
        <li className='text-white font-medium'><Link to='/contact'>CONTACT US</Link></li>
-       <li className='text-white font-medium'><Link to='/ourshop'>OUR SHOP</Link></li> 
+       <li className='text-white font-medium'><Link to='/order'>ORDER FOOD</Link></li> 
 
     
      </>
