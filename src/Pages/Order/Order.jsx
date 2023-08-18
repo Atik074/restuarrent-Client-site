@@ -4,23 +4,38 @@ import 'react-tabs/style/react-tabs.css';
 import orderImg from '../../assets/shop/banner2.jpg';
 import Cover from '../Home/Shared/Cover/Cover';
 import useMenu from '../../Hooks/UseMenu';
-import FoodCard from '../../Components/FoodCard/FoodCard';
 import OrderTab from './OrderTab/OrderTab';
+import { useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
  
 
 const Order = () => {
-    const [menu] = useMenu()
-    const [tabIndex, setTabIndex] = useState(0);
+  const categories = ['salads', 'pizza', 'soups', 'desserts', 'drinks'];
+  const {category} = useParams();
+  const initialIndex = categories.indexOf(category);
+  const [tabIndex, setTabIndex] = useState(initialIndex);
+  const [menu] = useMenu();
+    console.log(category)
+    console.log(initialIndex)
 
-    const drinks = menu.filter(item =>item.category == 'drinks')
-    const desserts = menu.filter(item =>item.category == 'dessert')
-    const pizza = menu.filter(item =>item.category == 'pizza')
-    const salads = menu.filter(item =>item.category == 'salad')
-    const soups = menu.filter(item =>item.category == 'soup')
+
+
+  const desserts = menu.filter(item => item.category === 'dessert');
+  const soups = menu.filter(item => item.category === 'soup');
+  const salads = menu.filter(item => item.category === 'salad');
+  const pizza = menu.filter(item => item.category === 'pizza');
+  const drinks = menu.filter(item => item.category === 'drinks');
+  
+ 
 
     return (
         <div>
+          <Helmet>
+              <title>Bisto Boss | order food</title>
+          </Helmet>
+
+
         <Cover  img={orderImg}
         title={'OUR SHOP'}
         ></Cover>
