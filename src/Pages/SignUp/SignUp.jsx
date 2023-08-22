@@ -1,58 +1,101 @@
 import React from 'react';
 import img from '../../assets/others/authentication2.png'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
+import { useForm } from 'react-hook-form';
+import { Helmet } from 'react-helmet-async';
+import Swal from 'sweetalert2';
 
 const SignUp = () => {
-  const { createUser} = useContext(AuthContext)
+  const { createUser ,   updateUserProfile} = useContext(AuthContext)
+  const { register, handleSubmit, reset,  formState: { errors } } = useForm();
+  const navigate = useNavigate()
+  
+  
+  const onSubmit = data => {
+    console.log(data)
+    createUser( data.email , data.password)
+    .then(result=>{
+        const loggedUser = result.user 
+        console.log(loggedUser)
+        updateUserProfile(data.name , data.photoURL)
+        .then(()=>{
+          console.log('user profile is updated')
+          reset()
 
-  const handleCreateUsere = (event)=>{
-    event.preventDefault()
-    const from = event.target ;
-    const name = from.name.value 
-    const email = from.email.value 
-    const password = from.password.value 
-    console.log(name , email, password)
+            Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'user created successfully',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          navigate('/')
 
-    createUser(email ,password)
-    .then(result =>{
-        const user = result.user 
-        console.log(user)
+        })
+
+       .catch(error =>console.log(error))
+
     })
-    .catch(err =>console.log(err))
-  }
+    .catch(error =>console.log(error))
+    
+  };
+
+
+
+
     return (
-        <div className="hero min-h-screen bg-base-200">
+      <>
+       <Helmet>
+              <title>Bisto Boss | Sign up</title>
+         </Helmet>
+         <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse justify-around">
         <div className="text-center lg:text-left  md:w-1/2">
             <img src={img} alt="" className='rounded-lg' />
           </div>
           <div className="card  md:w-1/2 max-w-sm shadow-xl bg-base-100">
-            <form onSubmit={handleCreateUsere}  className="card-body">
+            <form onSubmit={handleSubmit(onSubmit)}  className="card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
                 </label>
-                <input type="name" name='name' placeholder="type here" className="input input-bordered" />
+                <input type="name" {...register("name", {required:true})} name='name' placeholder="type here" className="input input-bordered" />
+                {errors.name && <span className='mt-1 text-red-700'>Name field is required</span>}
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photo Url</span>
+                </label>
+                <input type="url" {...register("photoUrl" ,{required:true})}  placeholder="type here url" className="input input-bordered" />
+                {errors.photoUrl && <span className='mt-1 text-red-700'>Photo url is required</span>}
               </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
-                <input type="email" name='email' placeholder="type here" className="input input-bordered" />
+                <input type="email" {...register("email" ,{required:true})} name='email' placeholder="type here" className="input input-bordered" />
+                {errors.email && <span className='mt-1 text-red-700'>Email field is required</span>}
               </div>
-
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
-                <input type="password" name='password' placeholder="type password" className="input input-bordered" />
+                <input type="password" {...register("password", {required:true , minLength:6 ,
+                 maxLength:20,
+                 pattern:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{6,}$/
+                
+                })} name='password' placeholder="type password" className="input input-bordered" />
+                {errors.password?.type === 'required' && <span className='mt-1 text-red-700'>password field is required</span>}
+                {errors.password?.type === 'minLength' && <span className='mt-1 text-red-700'>password at least 6 character</span>}
+                {errors.password?.type === 'maxLength' && <span className='mt-1 text-red-700'>password maximum 15 character</span>}
+                {errors.password?.type === 'pattern' && <span className='mt-1 text-red-700'>password must be at least a capital letter,a small letter , a number & a special character</span>}
+              
           
               </div>
 
-
-              <div className="form-control mt-6">
+            <div className="form-control mt-6">
                 <input  className="py-3 rounded text-white text-xl bg-[#D1A054] border-blue-50" type="submit" value="Sign up" />
               </div>
 
@@ -63,6 +106,8 @@ const SignUp = () => {
           </div>
         </div>
       </div>
+      </>
+     
     );
 };
 

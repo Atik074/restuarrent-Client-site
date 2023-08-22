@@ -1,16 +1,22 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img from '../../assets/others/authentication1.png'
+import { Helmet } from 'react-helmet-async';
+import Swal from 'sweetalert2';
 
 
 
 const Login = () => {
-  const captchaRef = useRef(null)
   const [disabled , setDisabled] = useState(true) 
   const {signIn} = useContext(AuthContext)
+  let navigate = useNavigate()
+  let location = useLocation()
+
+
+   const from = location.state?.from?.pathname || "/"
 
  
 
@@ -26,6 +32,18 @@ const Login = () => {
        .then(result =>{
          const user = result.user 
          console.log(user)
+         Swal.fire({
+          title: 'successfully login',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+        })
+        
+        navigate(from , {replace:true})
+
       })
       .catch(error =>console.log(error))
 
@@ -38,8 +56,8 @@ const Login = () => {
   },[])
 
 // recaptcha part
-  const handleValidedCaptcha =()=>{
-      const user_captcha_value = captchaRef.current.value 
+  const handleValidedCaptcha =(e)=>{
+      const user_captcha_value = e.target.value 
 
       if(validateCaptcha(user_captcha_value)){
             setDisabled(false)
@@ -56,7 +74,12 @@ const Login = () => {
 
 
     return (
-        <div className="hero min-h-screen bg-base-200">
+      <>
+            <Helmet>
+              <title>Bisto Boss | Login</title>
+         </Helmet>
+
+         <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row justify-around">
           <div className="text-center lg:text-left  md:w-1/2">
             <img src={img} alt="" className='rounded-lg' />
@@ -84,9 +107,8 @@ const Login = () => {
                 <label className="label">
                      <LoadCanvasTemplate />
                 </label>
-                <input ref={captchaRef} type="text" name='type captcha' placeholder="recaptcha" className="input input-bordered" />
-                <button onClick={handleValidedCaptcha} className="btn btn-xs bg-slate-900 hover:bg-zinc-950
-                text-white mt-3 capitalize ">Reload captcha</button>
+                <input onBlur={handleValidedCaptcha}  type="text" name='type captcha' placeholder="recaptcha" className="input input-bordered" />
+               
               </div>
 
               <div className="form-control mt-3">
@@ -101,6 +123,8 @@ const Login = () => {
           </div>
         </div>
       </div>
+      </>
+   
     );
 };
 
