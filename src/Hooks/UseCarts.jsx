@@ -9,12 +9,11 @@ const  useCarts = ()=>{
     const { refetch , data:cart=[]} = useQuery({
     queryKey: ['carts' , user?.email],
     queryFn: async()=>{
-           const response =  await fetch(`http://localhost:5000/carts?email=${user?.email}`)
-
-            return response.json();
+        const response =  await fetch(`http://localhost:5000/carts?email=${user?.email}`)
+           return response.json();
     },
      })
-    return[refetch , cart]
+    return[cart , refetch]
   }
 
   export default useCarts;
