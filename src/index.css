@@ -5,3 +5,8 @@
 .drawer-side a.active {
     color: white !important;
   }
+  .drawer-side a{
+   background: transparent !important;
+     display:flex !important;
+     font-size: 18px;
+    }

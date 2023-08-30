@@ -1,9 +1,12 @@
 import React from 'react';
 import {  NavLink, Outlet } from 'react-router-dom';
-import { FaCalendar, FaHome, FaShoppingCart, FaWallet } from 'react-icons/fa';
-import { HiMenu } from 'react-icons/hi';
+import { FaCalendar, FaHome, FaShoppingBag, FaShoppingCart, FaWallet } from 'react-icons/fa';
+import { MdMenu,MdReviews,MdEmail} from 'react-icons/md';
+import useCarts from '../../Hooks/UseCarts';
 
 const Dashboard = () => {
+  const [cart]  = useCarts()
+
     return (
         <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -15,18 +18,24 @@ const Dashboard = () => {
         </div> 
         <div className="drawer-side bg-[#D1A056]">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label> 
-          <ul className="menu p-4 w-80 min-h-full text-base-content">
+          <ul className="menu  p-4 w-80 min-h-full text-base-content">
             {/* Sidebar content here */}
-            <li>< NavLink to=''><FaHome/>User Home</ NavLink></li>
-            <li>< NavLink to=''><FaCalendar/>Reservation</ NavLink></li>
-            <li>< NavLink to=''><FaWallet/>Payment History</ NavLink></li>
-            <li>< NavLink to='/dashboard/mycart'><FaShoppingCart/>My Cart</ NavLink></li>
+            <li>< NavLink  to='/dashboard/userhome'><FaHome />User Home</ NavLink></li>
+            <li>< NavLink  to='/dashborad/reservations'><FaCalendar />Reservation</ NavLink></li>
+            <li>< NavLink   to='/dashboard/history'><FaWallet />Payment History </ NavLink></li>
+
+            <li><NavLink  to='/dashboard/mycart'>
+                <FaShoppingCart/> My Cart
+                <span className="badge   badge-secondary">{cart?.length || 0}</span></NavLink></li>
+            <li>< NavLink  to='/dashboard/review'><MdReviews />Add Review
+            </ NavLink></li>
              
              <div className="divider"></div>
-             <li>< NavLink to='/'><FaHome/>Home</ NavLink></li>
-             <li>< NavLink to=''><HiMenu/>Menu</ NavLink></li>
-             <li>< NavLink to=''><FaHome/>Home</ NavLink></li>
-             <li>< NavLink to=''><FaHome/>Home</ NavLink></li>
+             <li>< NavLink   to='/'><FaHome />Home</ NavLink></li>
+             <li>< NavLink   to='/dashboard/menu'><MdMenu />Menu</ NavLink></li>
+             <li>< NavLink   to='/dashboard/shop'><FaShoppingBag/>Shop</ NavLink></li>
+             <li>< NavLink   to='/dashboard/contact'><MdEmail/>Contact</ NavLink></li>
+          
   
           </ul>
         
