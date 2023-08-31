@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img from '../../assets/others/authentication1.png'
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
+import SocialLogin from '../Home/Shared/SocialLogin/SocialLogin';
 
 
 
@@ -120,7 +121,11 @@ const Login = () => {
               <small className='text-[15px]'> New here ?</small><Link to='/signUp' className=' hover:underline'> Create a New Account</Link></p>
               <p className='text-center text-lg'>Or sign in With</p>
             </form>
+              <SocialLogin/>
           </div>
+        
+
+
         </div>
       </div>
       </>

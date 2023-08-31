@@ -12,15 +12,13 @@ const NavBar = () => {
  
 
   const handlelogOut= ()=>{
-     logOut()
-     .then(result =>{
-       const user = result.user 
-       console.log(user)
+      logOut()
+     .then(() =>{
+      
      })
-     
-     .then(error =>console.log(error))
+      .then(error =>console.log(error))
 
-   }
+}
 
     const navOptions = <> 
         <li className='text-white font-medium'><Link to='/'>HOME</Link></li>
