@@ -52,7 +52,7 @@ const MyCart = () => {
             </Helmet>
             <div className='flex uppercase font-semibold justify-between h-[60px] items-center mx-10'>
                 <h2 className='text-2xl'>Totall order: {cart.length}</h2>
-                <h2 className='text-2xl'>Totall price: ${totallPrice.toPrecision(5)}</h2>
+                <h2 className='text-2xl'>Totall price: ${totallPrice.toPrecision(4)}</h2>
                 <button className=" rounded px-4  text-xl  btn-sm text-white bg-[#D1A054]">Pay</button>
             </div>
 
