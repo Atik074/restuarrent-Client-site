@@ -3,14 +3,19 @@ import {  NavLink, Outlet } from 'react-router-dom';
 import { FaUtensils, FaHome, FaShoppingBag, FaShoppingCart, FaWallet, FaUsers, FaBook } from 'react-icons/fa';
 import { MdMenu,MdReviews,MdEmail} from 'react-icons/md';
 import { AiOutlineBars} from 'react-icons/ai';
-import useCarts from '../../Hooks/UseCarts';
+import useCarts from '../../Hooks/useCarts';
+import useAdmin from '../../Hooks/useAdmin';
+
+
 
 const Dashboard = () => {
   const [cart]  = useCarts()
-
+     console.log(cart)
 
   //TODO:  laod data from server dynamic is admin
-  const isAdmin = true
+      // const isAdmin = false
+    const [isAdmin] = useAdmin()
+    console.log(isAdmin)
 
     return (
         <div className="drawer lg:drawer-open">
@@ -25,8 +30,7 @@ const Dashboard = () => {
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label> 
           <ul className="menu  p-4 w-80 min-h-full text-base-content">
            
-           {
-             isAdmin ? 
+           { isAdmin ?
              <>
                <li>< NavLink  to='/dashboard/Adminhome'><FaHome />Admin Home</ NavLink></li>
             <li>< NavLink  to='/dashborad/additems'><FaUtensils />Add Items</ NavLink></li>

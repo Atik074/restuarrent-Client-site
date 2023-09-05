@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../../AuthProvider/AuthProvider';
 import { FaShoppingCart } from 'react-icons/fa';
-import useCarts from '../../../../Hooks/UseCarts';
+import useCarts from '../../../../Hooks/useCarts';
 
 
 
@@ -71,7 +71,7 @@ const NavBar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <a className="btn">Button</a>
+    
   </div>
 </div>
 

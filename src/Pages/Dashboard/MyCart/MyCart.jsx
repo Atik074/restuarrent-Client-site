@@ -1,16 +1,18 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import useCarts from '../../../Hooks/UseCarts';
+import useCarts from '../../../Hooks/useCarts';
 import {FaTrashAlt} from 'react-icons/fa';
 import Swal from 'sweetalert2';
 
 const MyCart = () => {
-    const [cart, refetch] = useCarts()
+    const [cart , refetch] = useCarts()
     console.log(cart)
+
+
+
     const totallPrice = cart.reduce((sum , item)=> item.price + sum , 0)
     
     const handleDelete= id=>{
-        
         Swal.fire({
             title: 'Are you sure?',
             icon: 'warning',
@@ -50,6 +52,7 @@ const MyCart = () => {
             <Helmet>
               <title>Bisto Boss | mycart</title>
             </Helmet>
+         
             <div className='flex uppercase font-semibold justify-between h-[60px] items-center mx-10'>
                 <h2 className='text-2xl'>Totall order: {cart.length}</h2>
                 <h2 className='text-2xl'>Totall price: ${totallPrice.toPrecision(4)}</h2>

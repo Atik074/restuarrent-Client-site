@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 import { useLocation, useNavigate } from 'react-router-dom';
-import useCarts from '../../Hooks/UseCarts';
+import useCarts from '../../Hooks/useCarts';
 
 const FoodCard = ({item}) => {
   const {_id , name ,image, recipe , price} = item

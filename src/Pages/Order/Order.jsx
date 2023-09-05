@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import orderImg from '../../assets/shop/banner2.jpg';
 import Cover from '../Home/Shared/Cover/Cover';
-import useMenu from '../../Hooks/UseMenu';
+import useMenu from '../../Hooks/useMenu';
 import OrderTab from './OrderTab/OrderTab';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';

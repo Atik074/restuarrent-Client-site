@@ -1,6 +1,6 @@
 
 import SectionTitle from '../../../Components/SectionTitle';
-import useMenu from '../../../Hooks/UseMenu';
+import useMenu from '../../../Hooks/useMenu';
 import MenuItem from '../Shared/MenuItem/MenuItem';
 
 const PopularMenu = () => {
