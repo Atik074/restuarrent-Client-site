@@ -33,7 +33,7 @@ const Dashboard = () => {
            { isAdmin ?
              <>
                <li>< NavLink  to='/dashboard/Adminhome'><FaHome />Admin Home</ NavLink></li>
-            <li>< NavLink  to='/dashborad/additems'><FaUtensils />Add Items</ NavLink></li>
+            <li>< NavLink  to='/dashborad/additems'><FaUtensils />Add an Item</ NavLink></li>
             <li>< NavLink   to='/dashboard/Manageitems'><AiOutlineBars/>Manage Items </ NavLink></li>
 
             <li><NavLink  to='/dashboard/bookings'>

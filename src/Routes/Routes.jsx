@@ -5,11 +5,13 @@ import Menu from "../Pages/Home/Menu/Menu";
 import Order from "../Pages/Order/Order";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
-import PrivateRoutes from "./PrivateRoutes";
 import Screte from "../Pages/Home/Shared/Screte/Screte";
 import Dashboard from "../Layout/Dashboard/Dashboard";
 import MyCart from "../Pages/Dashboard/MyCart/MyCart";
 import AllUsers from "../Layout/Dashboard/AllUsers/AllUsers";
+import AddItem from "../Pages/AddItem/AddItem";
+import PrivateRoutes from "./PrivateRoutes";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
     {
@@ -60,6 +62,10 @@ export const router = createBrowserRouter([
                 path:'allusers',
                 element:<AllUsers></AllUsers>
                 
+              },
+              {
+                path:'additem' ,
+                element:<AdminRoute><AddItem/></AdminRoute>   
               }
             
         ]

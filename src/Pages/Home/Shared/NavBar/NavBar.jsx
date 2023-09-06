@@ -24,7 +24,7 @@ const NavBar = () => {
         <li className='text-white font-medium'><Link to='/'>HOME</Link></li>
        <li className='text-white font-medium '><Link to='/dashboard'>DASHBOARD</Link></li>
        <li className='text-white font-medium'><Link to='/menu'>OUR MENU</Link></li>
-       <li className='text-white font-medium'><Link to='/contact'>CONTACT US</Link></li>
+       <li className='text-white font-medium'><Link to='/dashboard/additem'>ADD ITEM</Link></li>
        <li className='text-white font-medium'><Link to='/order/salad'>ORDER FOOD</Link></li> 
        <li  className='text-white font-medium text-[17px] -mt-0'>
 
