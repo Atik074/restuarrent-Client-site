@@ -1,11 +1,67 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FaUtensils } from 'react-icons/fa';
+import useAxiosSecure from '../../Hooks/axiosSecured';
+import Swal from 'sweetalert2';
+
+
+
+//image hosted
+const imageHosting = import.meta.env.VITE_IMAGE_API_KEY;
+
+
 
 const AddItem = () => {
+   const [axiosSecure] = useAxiosSecure() 
+    const { register, handleSubmit, formState: { errors } , reset } = useForm();
+    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${imageHosting}` 
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+
+  const onSubmit = data =>{
+
+    const formData = new FormData()
+       formData.append('image' , data.image[0])
+
+       fetch(img_hosting_url , {
+            method:'POST' ,
+           body:formData
+          })
+      .then(res =>res.json())
+      .then(imagesResponse =>{
+        console.log(imagesResponse)
+        if(imagesResponse.success){
+           const imgURL = imagesResponse.data.display_url
+           const {name , price , category, recipe} = data 
+           const newItem = { name , price:parseFloat(price) , category, recipe , image:imgURL  }
+           console.log(newItem)
+
+           axiosSecure.post('/menu' , newItem)
+           .then(res =>{
+                 if(res.data.insertedId){
+                  reset()
+                  Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Item added successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+                
+                }
+           })
+            
+        }
+      
+      })
+
+
+
+
+
+
+
+    
+    };
     console.log(errors);
 
 
@@ -26,7 +82,7 @@ const AddItem = () => {
   
   </label>
   <select className="select select-bordered  text-[18px]" {...register("category", { required: true })}>
-    <option elected>category</option>
+    <option >category</option>
     <option>Salad</option>
     <option>Pizza</option>
     <option>Soup</option>
@@ -49,7 +105,7 @@ const AddItem = () => {
    <label className="label">
    <p className="label-text mb-1 text-[19px] font-medium">Recipe details<span className='text-red-800'>*</span></p>
    </label>
-   <textarea {...register("details", { required: true })} className="textarea textarea-bordered h-24 resize-none  text-lg" placeholder="recepie details"></textarea>
+   <textarea {...register("recipe", { required: true })} className="textarea textarea-bordered h-24 resize-none  text-lg" placeholder="recepie details"></textarea>
  </div>
   
    <div className="form-control max-w-sm mb-4">
