@@ -20,10 +20,11 @@ const Dashboard = () => {
     return (
         <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col items-center justify-center">
+        <div className="drawer-content">
           {/* Page content here */}
-            <Outlet></Outlet>
+          <Outlet></Outlet>
           <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
+    
           
         </div> 
         <div className="drawer-side bg-[#D1A056]">
@@ -33,7 +34,7 @@ const Dashboard = () => {
            { isAdmin ?
              <>
                <li>< NavLink  to='/dashboard/Adminhome'><FaHome />Admin Home</ NavLink></li>
-            <li>< NavLink  to='/dashborad/additem'><FaUtensils />Add an Item</ NavLink></li>
+            <li>< NavLink  to='/dashboard/additem'><FaUtensils />Add an Item</ NavLink></li>
             <li>< NavLink   to='/dashboard/Manageitems'><AiOutlineBars/>Manage Items </ NavLink></li>
 
             <li><NavLink  to='/dashboard/bookings'>

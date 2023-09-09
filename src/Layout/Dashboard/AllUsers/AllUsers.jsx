@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import SectionTitle from '../../../Components/SectionTitle';
 import { FaTrashAlt, FaUserShield } from 'react-icons/fa';
 import Swal from 'sweetalert2';
-import useAxiosSecure from '../../../Hooks/axiosSecured';
+import useAxiosSecure from '../../../Hooks/AxiosSecured';
 
 
 const AllUsers = () => {
@@ -34,15 +34,46 @@ const AllUsers = () => {
             })
             }
          })
+     }
 
 
-    
-         }
+//handle  DELETE users
 
- const  handleDelete =(user)=>{
+     const handleDeleteUsers=(id)=>{
+        
+      Swal.fire({
+          title: 'Are you sure?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+           if (result.isConfirmed){
 
-      }
-
+            fetch(`http://localhost:5000/users/admin/${id}`,{
+              method:'DELETE' ,
+              headers:{
+                 'content-type' : 'application/json'   
+            }
+            })
+            .then(res =>res.json())
+           .then(data =>{ 
+                 console.log(data)
+                   if(data.deletedCount === 1){
+                      refetch()
+                      Swal.fire(
+                          'Deleted!',
+                          'Your order has been deleted.',
+                          'success'
+                        )
+                    }
+                })             
+          }
+      })     
+  
+   }
+  
 
 
 
@@ -84,7 +115,7 @@ const AllUsers = () => {
                 {user.role === 'admin' ? 'admin' :  <button onClick={()=>handleMakeAdmin(user)}  className="bt p-2 rounded bg-[#D1A454] text-white"><FaUserShield size={24}/></button> }
             </td>
             <td>               
-                 <button  className="bt p-2 rounded bg-red-700 text-white"><FaTrashAlt size={24}/></button>
+                 <button onClick={()=>handleDeleteUsers(user._id)}  className="bt p-2 rounded bg-red-700 text-white"><FaTrashAlt size={24}/></button>
            </td>
           </tr>)
       }

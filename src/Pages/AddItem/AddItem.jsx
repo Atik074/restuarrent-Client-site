@@ -1,8 +1,9 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FaUtensils } from 'react-icons/fa';
-import useAxiosSecure from '../../Hooks/axiosSecured';
 import Swal from 'sweetalert2';
+import SectionTitle from '../../Components/SectionTitle';
+import useAxiosSecure from '../../Hooks/AxiosSecured';
 
 
 
@@ -53,20 +54,20 @@ const AddItem = () => {
         }
       
       })
-
-
-
-
-
-
-
     
     };
-    console.log(errors);
+ 
 
 
     return (
         <div className='w-full px-10'>
+          <SectionTitle
+             subheading={`---what's new?---`}
+             heading={'ADD AN ITEM'}
+          ></SectionTitle>
+
+
+
         <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-control w-full ">
           <label className="label">
@@ -112,8 +113,8 @@ const AddItem = () => {
      <input type="file" {...register("image", { required: true })}  className="file-input file-input-bordered file-input-sm w-full " />
    </div>
         <button className='flex items-center text-[21px] font-medium text-white px-3 py-[9px] rounded bg-[#D1A454]'>Add item <FaUtensils className='mx-2'></FaUtensils></button>
-          
-           </form>
+
+         </form>
         </div>
     );
 };
