@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import SectionTitle from '../../../Components/SectionTitle';
 import { FaTrashAlt, FaUserShield } from 'react-icons/fa';
 import Swal from 'sweetalert2';
-import useAxiosSecure from '../../../Hooks/AxiosSecured';
+import useAxiosSecure from '../../../Hooks/axiosSecured';
 
 
 const AllUsers = () => {

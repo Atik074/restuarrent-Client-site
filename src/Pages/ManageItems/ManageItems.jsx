@@ -3,7 +3,7 @@ import SectionTitle from '../../Components/SectionTitle';
 import { FaTrashAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import useMenu from '../../Hooks/UseMenu';
-import useAxiosSecure from '../../Hooks/AxiosSecured';
+import useAxiosSecure from '../../Hooks/axiosSecured';
 
 const ManageItems = () => {
     const [menu , , refetch] = useMenu()
